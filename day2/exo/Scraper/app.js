@@ -36,10 +36,6 @@ const cheerio = require('cheerio');
     fs.writeFileSync('donnees.json', JSON.stringify(tableData, null, 2), 'utf-8');
     console.log('✅ Données enregistrées dans donnees.json');
 
-    // ✅ Enregistrement dans un fichier JS avec export
-    const jsContent = 'module.exports = ' + JSON.stringify(tableData, null, 2) + ';';
-    fs.writeFileSync('donnees.js', jsContent, 'utf-8');
-console.log('✅ Données enregistrées dans donnees.js');
   } catch (error) {
     console.error('Erreur :', error);
   }
