@@ -1,16 +1,13 @@
-const axios = require('axios');
+const fs = require('fs');
+
 const cheerio = require('cheerio');
 
 (async () => {
   try {
-    const url = 'https://fr.wikipedia.org/wiki/Liste_des_footballeurs_les_plus_cap%C3%A9s_en_%C3%A9quipe_nationale';
-    
-    // On récupère le HTML avec axios
-    const response = await axios.get(url);
-    const html = response.data;
+    // On récupère le HTML avec cheerio
+    const $ = await cheerio.fromURL('https://fr.wikipedia.org/wiki/Liste_des_footballeurs_les_plus_cap%C3%A9s_en_%C3%A9quipe_nationale');
 
-    // On charge le HTML avec cheerio
-    const $ = cheerio.load(html);
+
 
     const tableData = [];
 
@@ -35,9 +32,15 @@ const cheerio = require('cheerio');
       }
     });
 
-    console.log(tableData);
+    // ✅ Enregistrement dans un fichier JSON
+    fs.writeFileSync('donnees.json', JSON.stringify(tableData, null, 2), 'utf-8');
+    console.log('✅ Données enregistrées dans donnees.json');
+
+    // ✅ Enregistrement dans un fichier JS avec export
+    const jsContent = 'module.exports = ' + JSON.stringify(tableData, null, 2) + ';';
+    fs.writeFileSync('donnees.js', jsContent, 'utf-8');
+console.log('✅ Données enregistrées dans donnees.js');
   } catch (error) {
-    console.error('Erreur lors de la récupération des données :', error);
+    console.error('Erreur :', error);
   }
 })();
-
