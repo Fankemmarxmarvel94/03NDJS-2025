@@ -30,7 +30,7 @@ const cheerio = require('cheerio');
         };
         tableData.push(rowData);
       }
-    });
+kn jn    });
 
     // ✅ Enregistrement dans un fichier JSON
     fs.writeFileSync('donnees.json', JSON.stringify(tableData, null, 2), 'utf-8');
