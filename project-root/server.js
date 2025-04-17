@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoutes = require('./routes/authRoutes'); // Importer les routes d'authentification
 const userRoutes = require('./routes/userRoutes'); // Importer les routes utilisateur
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
